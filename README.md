@@ -1,19 +1,18 @@
 # CarteAuxTresors
-Exercice pratique de la Carte Aux Trésors pour Carbon IT
+Exercice pratique de la Carte Aux Trésors pour Carbon IT.
 
 ## Prérequis
--Java 17 et gradle
+Pour exécuter le projet il faut avoir java 17 et gradle 7.6.x sur son poste.
 
-## Recuperation du projet
+## Cloner le projet
+Pour cloner ce projet, exécuter la commande suivante :   
+`git clone https://github.com/e-renard/CarteAuxTresors.git`
 
-## Projet
+## Lancer le projet
+Pour lancer le projet, on peut exécuter la commande `./gradlew bootRun` à la racine du projet.   
+(L'exécution du projet packagé n'est pas encore prise en compte car on ne peut pas choisir l'emplacement la de sauvagred du fichier de sortie)
 
-## Guide d'utilisation
--fichier par defaut
--generateur de fichier à partir de la ligne de commande
--appliation qui sort un fichier de sortie
-
-
-Comportment par défaut :  si la ligne n'est pas au bon format, elle sera ignorée. Si une anomalie se produit pendant la chasse au trésor, il y aura un message d'eerur qui décrit le problème survenu dans le fichier de sortie. 
+## Lancer les tests
+Pour lancer les tests, on peut exécuter la commande `./gradlew tests` à la racine du projet.
 
 
