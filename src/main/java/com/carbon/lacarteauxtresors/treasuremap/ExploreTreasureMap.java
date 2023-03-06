@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,7 +61,6 @@ public class ExploreTreasureMap {
         TreasureMapValidator treasureMapValidator = new TreasureMapValidator();
         String movements = adventurer.getMovementSequence();
         for (int i = 0; i < movements.length(); i++) {
-            log.info("ADVENTURER INFO\n {}\n {}\n", adventurer.getOrientation(), adventurer.getPosition());
             char move = movements.charAt(i);
             if (adventurerMovements.canAdventurerMove(adventurer, treasureMap, String.valueOf(move))) {
                 adventurerMovements.updateAdventurerPosition(adventurer, String.valueOf(move));
@@ -76,19 +74,19 @@ public class ExploreTreasureMap {
         }
     }
 
-    private Treasure createTreasureFromData(List<String> treasureMapData) {
+    public Treasure createTreasureFromData(List<String> treasureMapData) {
         return new Treasure(
                 new Position(Integer.parseInt(treasureMapData.get(1)), Integer.parseInt(treasureMapData.get(2))),
                 Integer.parseInt(treasureMapData.get(3)));
     }
 
-    private Mountain createMountainFromData(List<String> treasureMapData) {
+    public Mountain createMountainFromData(List<String> treasureMapData) {
         return new Mountain(new Position(
                 Integer.parseInt(treasureMapData.get(1)),
                 Integer.parseInt(treasureMapData.get(2))));
     }
 
-    private TreasureMap createMapFromData(List<String> treasureMapData, List<Mountain> mountain, List<Treasure> treasure) {
+    public TreasureMap createMapFromData(List<String> treasureMapData, List<Mountain> mountain, List<Treasure> treasure) {
         TreasureMap treasureMap = new TreasureMap(
                 Integer.parseInt(treasureMapData.get(1)),
                 Integer.parseInt(treasureMapData.get(2)),
@@ -98,7 +96,7 @@ public class ExploreTreasureMap {
         return treasureMapValidator.isTreasureMapValid() ? treasureMap : null;
     }
 
-    private Adventurer createAdventurerFromData(List<String> adventurerData) {
+    public Adventurer createAdventurerFromData(List<String> adventurerData) {
         Adventurer adventurer = new Adventurer(
                 adventurerData.get(1),
                 new Position(Integer.parseInt(adventurerData.get(2)), Integer.parseInt(adventurerData.get(3))),
@@ -109,7 +107,7 @@ public class ExploreTreasureMap {
         return adventurerValidator.isAdventurerInfoValid() ? adventurer : null;
     }
 
-    private List<Treasure> removeEmptyTreasure(List<Treasure> treasure) {
+    public List<Treasure> removeEmptyTreasure(List<Treasure> treasure) {
         return treasure.stream().filter(treasure1 -> treasure1.getNbTreasure()>0).collect(Collectors.toList());
     }
 

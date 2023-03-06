@@ -1,22 +1,21 @@
 package com.carbon.lacarteauxtresors.treasuremap;
 
-
 import com.carbon.lacarteauxtresors.adventurer.Adventurer;
 import com.carbon.lacarteauxtresors.commons.Position;
 import com.carbon.lacarteauxtresors.treasuremapitems.Treasure;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
 public class TreasureMapValidator {
+
     private TreasureMap treasureMap;
 
     public boolean isTreasureMapValid() {
@@ -42,8 +41,8 @@ public class TreasureMapValidator {
     }
 
     public boolean hasMountainAtPosition(Position position) {
-        log.info("HAS MOUNTAIN : {}", this.treasureMap.getMountains().stream().anyMatch(mountain -> mountain.getPosition().equals(position)));
-        return this.treasureMap.getMountains().stream().anyMatch(mountain -> mountain.getPosition().equals(position));
+        return this.treasureMap.getMountains().stream()
+                .anyMatch(mountain -> mountain.getPosition().equals(position));
     }
 
     public List<Treasure> findTreasureAtPosition(List<Treasure> treasure, Position position, Adventurer adventurer) {
@@ -52,7 +51,7 @@ public class TreasureMapValidator {
                 .map(treasure1 -> {
                     log.info("{}", adventurer.getPosition());
                     treasure1.setNbTreasure(treasure1.getNbTreasure() - 1);
-                    adventurer.setNbTreasure(adventurer.getNbTreasure()+1);
+                    adventurer.setNbTreasure(adventurer.getNbTreasure() + 1);
                     return treasure1;
                 })
                 .collect(Collectors.toList());
