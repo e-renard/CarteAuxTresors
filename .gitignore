@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### outputfiles ###
+treasure_map_exploration_result.txt

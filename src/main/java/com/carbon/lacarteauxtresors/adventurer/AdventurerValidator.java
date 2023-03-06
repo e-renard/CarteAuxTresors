@@ -1,11 +1,10 @@
 package com.carbon.lacarteauxtresors.adventurer;
 
-import com.carbon.lacarteauxtresors.commons.Orientation;
+import com.carbon.lacarteauxtresors.commons.Position;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,12 +16,11 @@ public class AdventurerValidator {
     private Adventurer adventurer;
 
     public boolean isAdventurerInfoValid() {
-        return hasAllInfo() && isPositionInMapBounds() && isOrientationValid() && isMovementSequenceValid();
+        return hasAllInfo() && isPositionInMapBounds() && isMovementSequenceValid();
     }
     public boolean hasAllInfo(){
         if (this.adventurer.getName().isEmpty() ||
-                this.adventurer.getPositionX() == null  ||
-                this.adventurer.getPositionY() == null ||
+                this.adventurer.getPosition() == null  ||
                 this.adventurer.getOrientation() == null ||
                 this.adventurer.getMovementSequence().isEmpty() ||
                 this.adventurer.getNbTreasure() ==  null) {
@@ -32,12 +30,12 @@ public class AdventurerValidator {
     }
 
     public boolean isPositionInMapBounds() {
-        return this.adventurer.getPositionX() >= 0 && this.adventurer.getPositionY() >= 0;
+        return this.adventurer.getPosition().getX() >= 0 && this.adventurer.getPosition().getY() >= 0;
     }
 
-    public boolean isOrientationValid(){
-        return Arrays.stream(Orientation.values())
-                .anyMatch(orientation -> this.adventurer.getOrientation().equals(orientation.name()));
+    public boolean isNextPostionInBounds(Position position, int width, int height){
+        return position.getX() >= 0 && position.getX() < width
+                && position.getY() < height && position.getY() >= 0;
     }
 
     public boolean isMovementSequenceValid(){

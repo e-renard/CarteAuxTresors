@@ -1,5 +1,6 @@
 package com.carbon.lacarteauxtresors.treasuremap;
 
+import com.carbon.lacarteauxtresors.commons.Position;
 import com.carbon.lacarteauxtresors.treasuremapitems.Mountain;
 import com.carbon.lacarteauxtresors.treasuremapitems.Treasure;
 import org.junit.jupiter.api.Test;
@@ -22,8 +23,8 @@ public class TreasureMapValidatorTest {
     public void shouldHaveAllMountainsInBounds() {
         List<Mountain> mountains = Stream.
                 of(
-                new Mountain(1,0),
-                new Mountain(2,2)
+                new Mountain(new Position(1,0)),
+                        new Mountain(new Position(1,0))
                 )
                 .toList();
         TreasureMap treasureMap = new TreasureMap(3, 4, mountains, any());
@@ -34,10 +35,14 @@ public class TreasureMapValidatorTest {
     @Test
     public void shouldHaveAllTreasureInBounds() {
         List<Treasure> treasure = Stream.of(
-                new Treasure(2,0,2)
+                new Treasure(new Position(0,2), 2)
         ).toList();
         TreasureMap treasureMap = new TreasureMap(3, 4, any(), treasure);
         TreasureMapValidator treasureMapValidator = new TreasureMapValidator(treasureMap);
         assertTrue(treasureMapValidator.isMapTreasureInBounds());
+    }
+
+    public void shouldHaveOneObjectPerPosition() {
+
     }
 }
